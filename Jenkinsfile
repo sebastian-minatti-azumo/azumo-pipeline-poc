@@ -446,4 +446,5 @@ pipeline {
                 build 'etlJobMLDataStockPredictionOrlinExitAggregator'
             }
         }
+    }
 }
