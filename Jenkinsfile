@@ -293,7 +293,6 @@ pipeline {
         }
         stage('Single Universe Customer Exports'){
             steps {
-                build 'etlJobMLDataStockPredictionExportCustomerOrbimed'
                 build 'etlJobMLDataStockPredictionExportCustomerHealthcor'
                 build 'etlJobMLDataStockPredictionExportCustomerBarclaysLarge'
                 build 'etlJobMLDataStockPredictionExportCustomerBarclaysMIDDY'
@@ -317,16 +316,29 @@ pipeline {
                 build 'etlJobMLDataStockPredictionExportCustomerAsymmetryNonThera'
             }
         }
+        stage('etlJobMLDataStockPredictionAsymmetryAggregator'){
+            steps{
+                build 'etlJobMLDataStockPredictionAsymmetryAggregator'
+            }
+        }
         stage('Signal Exports'){
             steps {
                 build 'etlJobMLDataStockPredictionExportCustomerJPMorgan'
                 build 'etlJobMLDataStockPredictionExportCustomerJPMorganLarge'
+                build 'etlJobMLDataStockPredictionExportCustomerJPMorganMIDDY'
             }
         }
         stage('Summary Matrix Exports'){
             steps {
                 build 'etlJobMLDataPivotRun_JPMORGAN_LARGECAP'
                 build 'etlJobMLDataPivotRun_JPMORGAN_UNIVERSE'
+                build 'etlJobMLDataPivotRun_JPMORGAN_MIDDY'
+            }
+        }
+        stage('Orlin Aggregator'){
+            steps {
+                build 'etlJobMLDataStockPredictionOrlinEntryAggregator'
+                build 'etlJobMLDataStockPredictionOrlinExitAggregator'
             }
         }
         stage('Post Customer Exports update actuales'){
@@ -372,6 +384,16 @@ pipeline {
         stage('etlJobMLRegimeVisionKelly'){
             steps {
                 build 'etlJobMLRegimeVisionKelly'
+            }
+        }
+        stage('etlJobMLDataRegimeVisionSkew'){
+            steps {
+                build 'etlJobMLDataRegimeVisionSkew'
+            }
+        }
+        stage('etlJobExecuteSQLFile_update_rv_ssg_ml_anlysis'){
+            steps {
+                build 'etlJobExecuteSQLFile_update_rv_ssg_ml_anlysis'
             }
         }
         stage('etlJobWebCacheUpdate'){
@@ -438,12 +460,6 @@ pipeline {
         stage('etlJobCustomerFilePump'){
             steps {
                 build 'etlJobCustomerFilePump'
-            }
-        }
-        stage('Orlin Aggregator'){
-            steps{
-                build 'etlJobMLDataStockPredictionOrlinEntryAggregator'
-                build 'etlJobMLDataStockPredictionOrlinExitAggregator'
             }
         }
     }
