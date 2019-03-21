@@ -228,26 +228,26 @@ pipeline {
         }
         stage('ORLIN Universes'){
             steps {
-                build 'etlJobMLDataStockPredictionExportCustomer_DAILY_STOCK_PREDICTION_EXPORT_10DAY_ORLIN_UNIVERSE1'
-                build 'etlJobMLDataStockPredictionExportCustomer_DAILY_STOCK_PREDICTION_EXPORT_10DAY_ORLIN_UNIVERSE2'
-                build 'etlJobMLDataStockPredictionExportCustomerOrlinSPY'
+                build 'etlJobMLDataStockPredictionExportCustomer_DAILY_STOCK_PREDICTION_EXPORT_10DAY_ORLIN_UNIVERSE1', propagate: false
+                build 'etlJobMLDataStockPredictionExportCustomer_DAILY_STOCK_PREDICTION_EXPORT_10DAY_ORLIN_UNIVERSE2', propagate: false
+                build 'etlJobMLDataStockPredictionExportCustomerOrlinSPY', propagate: false
             }
         }
         stage('ORLIN Entry and Exit'){
             steps {
-                build 'etlJobMLDataStockPredictionOrlinEntryGen'
-                build 'etlJobMLDataStockPredictionOrlinExitGen'
+                build 'etlJobMLDataStockPredictionOrlinEntryGen', propagate: false
+                build 'etlJobMLDataStockPredictionOrlinExitGen', propagate: false
             }
         }
         stage('Orlin MIDDY Signal Gen'){
             steps {
-                build 'etlJobMLDataStockPredictionExportCustomer_DAILY_STOCK_PREDICTION_EXPORT_10DAY_ORLINMIDDY'
+                build 'etlJobMLDataStockPredictionExportCustomer_DAILY_STOCK_PREDICTION_EXPORT_10DAY_ORLINMIDDY', propagate: false
             }
         }
         stage('Orlin MIDDY Entry / Exit Gen'){
             steps {
-                build 'etlJobMLDataStockPredictionOrlinEntryGenMIDDY'
-                build 'etlJobMLDataStockPredictionOrlinExitGenMIDDY'
+                build 'etlJobMLDataStockPredictionOrlinEntryGenMIDDY', propagate: false
+                build 'etlJobMLDataStockPredictionOrlinExitGenMIDDY', propagate: false
             }
         }
         stage('etlJobMLDataStockPredictionExportCustomer_DAILY_STOCK_PREDICTION_EXPORT_10DAY_JIM_PP'){
@@ -300,65 +300,72 @@ pipeline {
         }
         stage('Generate Signal Exports'){
             steps {
-                build 'etlJobMLDataStockPredictionExportCustomerOrlinHealthcare1'
-                build 'etlJobMLDataStockPredictionExportCustomerOrlinHealthcare2'
+                build 'etlJobMLDataStockPredictionExportCustomerOrlinHealthcare1', propagate:false
+                build 'etlJobMLDataStockPredictionExportCustomerOrlinHealthcare2', propagate:false
             }
         }
         stage('Generate Entry and Exit Files'){
             steps {
-                build 'etlJobMLDataStockPredictionOrlinEntryGenHealthcare'
-                build 'etlJobMLDataStockPredictionOrlinExitGenHealthcare'
+                build 'etlJobMLDataStockPredictionOrlinEntryGenHealthcare', propagate:false
+                build 'etlJobMLDataStockPredictionOrlinExitGenHealthcare', propagate:false
             }
         }
         stage('SR Daily ML Data Asymmetry'){
             steps {
-                build 'etlJobMLDataStockPredictionExportCustomerAsymmetryTheraOnly'
-                build 'etlJobMLDataStockPredictionExportCustomerAsymmetryNonThera'
+                build 'etlJobMLDataStockPredictionExportCustomerAsymmetryTheraOnly', propagate:false
+                build 'etlJobMLDataStockPredictionExportCustomerAsymmetryNonThera', propagate:false
             }
         }
         stage('etlJobMLDataStockPredictionAsymmetryAggregator'){
             steps{
-                build 'etlJobMLDataStockPredictionAsymmetryAggregator'
+                build 'etlJobMLDataStockPredictionAsymmetryAggregator', propagate:false
             }
         }
         stage('Signal Exports'){
             steps {
-                build 'etlJobMLDataStockPredictionExportCustomerJPMorgan'
-                build 'etlJobMLDataStockPredictionExportCustomerJPMorganLarge'
-                build 'etlJobMLDataStockPredictionExportCustomerJPMorganMIDDY'
+                build 'etlJobMLDataStockPredictionExportCustomerJPMorgan', propagate:false
+                build 'etlJobMLDataStockPredictionExportCustomerJPMorganLarge', propagate:false
+                build 'etlJobMLDataStockPredictionExportCustomerJPMorganMIDDY', propagate:false
             }
         }
         stage('Summary Matrix Exports'){
             steps {
-                build 'etlJobMLDataPivotRun_JPMORGAN_LARGECAP'
-                build 'etlJobMLDataPivotRun_JPMORGAN_UNIVERSE'
-                build 'etlJobMLDataPivotRun_JPMORGAN_MIDDY'
+                build 'etlJobMLDataPivotRun_JPMORGAN_LARGECAP', propagate:false
+                build 'etlJobMLDataPivotRun_JPMORGAN_UNIVERSE', propagate:false
+                build 'etlJobMLDataPivotRun_JPMORGAN_MIDDY', propagate:false
+            }
+        }
+        stage('Orbimed'){
+            steps {
+                build 'etlJobMLDataStockPredictionExportCustomerOrbimed', propagate:false
+                build 'etlJobMLDataStockPredictionExportCustomerOrbimedThera', propagate:false
+                build 'etlJobMLDataStockPredictionExportCustomerOrbimedNonThera', propagate:false
             }
         }
         stage('Orlin Aggregator'){
             steps {
-                build 'etlJobMLDataStockPredictionOrlinEntryAggregator'
-                build 'etlJobMLDataStockPredictionOrlinExitAggregator'
+                build 'etlJobMLDataStockPredictionOrlinEntryAggregator', propagate:false
+                build 'etlJobMLDataStockPredictionOrlinExitAggregator', propagate:false
             }
         }
         stage('Post Customer Exports update actuales'){
             steps {
-                build 'etlJobScriptWrapper_ml_daily_update_export_actuals'
+                build 'etlJobScriptWrapper_ml_daily_update_export_actuals', propagate:false
             }
         }
         stage('Customer Diagnostics'){
             steps {
-                build 'etlJobMLDataStockPredictionDiagnostics_DIAGNOSTICS_LAZARDI50TO100B'
+                build 'etlJobMLDataStockPredictionDiagnostics_DIAGNOSTICS_LAZARDI50TO100B', propagate:false
             }
         }
         stage('Post Customer Exports'){
             steps {
-                build 'etlJobMLDataStockPredictionPNLExport'
+                build 'etlJobMLDataStockPredictionPNLExport', propagate:false
             }
         }
         stage('File Pump'){
             steps {
-                build 'etlJobCustomerFilePump'
+                build 'etlJobCustomerFilePump', propagate:false
             }
         }
         stage('etlJobScriptWrapper_ml_daily_phase3'){
