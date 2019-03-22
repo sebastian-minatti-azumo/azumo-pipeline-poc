@@ -60,7 +60,7 @@ pipeline {
             steps {
                 build 'etlJobCalcStockCompositeScore'
                 build 'etlJobCalcSSGComposite'
-                build 'etlJobCalcStockBuySellSpotsDynamic'
+                //build 'etlJobCalcStockBuySellSpotsDynamic'
                 build 'etlJobCalcStockActionCategoryFeatureGen'
             }
         }
@@ -216,20 +216,20 @@ pipeline {
         }
         stage('DAILY_WATERFALL_EXPORT'){
             steps {
-                build 'etlJobMLDataStockPredictionWaterfallExport_DAILY_WATERFALL_EXPORT_10DAY'
-                build 'etlJobMLDataStockPredictionWaterfallExport_DAILY_WATERFALL_EXPORT_5DAY'
+                //build 'etlJobMLDataStockPredictionWaterfallExport_DAILY_WATERFALL_EXPORT_10DAY'
+                //build 'etlJobMLDataStockPredictionWaterfallExport_DAILY_WATERFALL_EXPORT_5DAY'
             }
         }
         stage('DAILY_DIAGNOSTICS'){
             steps {
-                build 'etlJobMLDataStockPredictionDiagnostics_DAILY_DIAGNOSTICS_10DAY'
-                build 'etlJobMLDataStockPredictionDiagnostics_DAILY_DIAGNOSTICS_5DAY'
+                //build 'etlJobMLDataStockPredictionDiagnostics_DAILY_DIAGNOSTICS_10DAY'
+                //build 'etlJobMLDataStockPredictionDiagnostics_DAILY_DIAGNOSTICS_5DAY'
             }
         }
         stage('ORLIN Universes'){
             steps {
                 build 'etlJobMLDataStockPredictionExportCustomer_DAILY_STOCK_PREDICTION_EXPORT_10DAY_ORLIN_UNIVERSE1', propagate: false
-                build 'etlJobMLDataStockPredictionExportCustomer_DAILY_STOCK_PREDICTION_EXPORT_10DAY_ORLIN_UNIVERSE2', propagate: false
+                //build 'etlJobMLDataStockPredictionExportCustomer_DAILY_STOCK_PREDICTION_EXPORT_10DAY_ORLIN_UNIVERSE2', propagate: false
                 build 'etlJobMLDataStockPredictionExportCustomerOrlinSPY', propagate: false
             }
         }
@@ -337,7 +337,7 @@ pipeline {
         }
         stage('Orbimed'){
             steps {
-                build 'etlJobMLDataStockPredictionExportCustomerOrbimed', propagate:false
+                //build 'etlJobMLDataStockPredictionExportCustomerOrbimed', propagate:false
                 build 'etlJobMLDataStockPredictionExportCustomerOrbimedThera', propagate:false
                 build 'etlJobMLDataStockPredictionExportCustomerOrbimedNonThera', propagate:false
             }
@@ -410,12 +410,12 @@ pipeline {
         }
         stage('etlJobCustomerFileRetriever'){
             steps {
-                build 'etlJobCustomerFileRetriever'
+                //build 'etlJobCustomerFileRetriever'
             }
         }
         stage('csvLoaderPortfolioImport'){
             steps {
-                build 'csvLoaderPortfolioImport'
+                //build 'csvLoaderPortfolioImport'
             }
         }
         stage('Change Summary and Portfolio Scoring'){
